@@ -1,0 +1,90 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "filamentboot/filamentboot-oss",
+    "description": "阿里云 OSS 存储插件，为 filamentboot/filamentboot 提供 Flysystem OSS 磁盘驱动与后台凭证配置页。",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["filament", "laravel", "oss", "aliyun", "storage", "filament-plugin", "cloud-storage", "flysystem"],
+    "homepage": "https://github.com/filamentboot/filamentboot-oss",
+    "authors": [
+        {
+            "name": "johncaptain",
+            "email": "JasonTodd0521@gmail.com",
+            "role": "developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/filamentboot/filamentboot-oss/issues",
+        "source": "https://github.com/filamentboot/filamentboot-oss",
+        "docs": "https://github.com/filamentboot/workspace/wiki/oss-plugin",
+        "wiki": "https://github.com/filamentboot/workspace/wiki"
+    },
+    "require": {
+        "php": "^8.3",
+        "filament/spatie-laravel-settings-plugin": "^5.6",
+        "filamentboot/filamentboot": "^0.5",
+        "iidestiny/flysystem-oss": "^4.8",
+        "spatie/laravel-settings": "^3.9"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.27",
+        "orchestra/testbench": "^10.0",
+        "phpunit/phpunit": "^12.5.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Filamentboot\\FilamentbootOss\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Filamentboot\\FilamentbootOss\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Filamentboot\\FilamentbootOss\\OssServiceProvider"
+            ]
+        },
+        "filamentboot": {
+            "slug": "filamentboot-oss",
+            "name": "阿里云 OSS 存储",
+            "type": "package",
+            "source": "official_listed",
+            "plugin_class": "Filamentboot\\FilamentbootOss\\OssPlugin",
+            "settings_page_slug": "settings/oss",
+            "service_provider": "Filamentboot\\FilamentbootOss\\OssServiceProvider",
+            "description": "阿里云 OSS 对象存储驱动，凭证由超管在后台配置页加密存储，无需修改 .env 文件。",
+            "requires": ["filamentboot/filamentboot"],
+            "compatibility": {
+                "laravel/framework": "^13.0",
+                "filament/filament": "^5.0"
+            },
+            "post_install": {
+                "publish_tags": ["filamentboot-oss-config"],
+                "run_migrations": false,
+                "seeders": []
+            }
+        },
+        "branch-alias": {
+            "dev-main": "0.5.x-dev"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit -c phpunit.xml.dist",
+        "test-coverage": "vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=2G",
+        "pint": "vendor/bin/pint",
+        "pint:test": "vendor/bin/pint --test"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
